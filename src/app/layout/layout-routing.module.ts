@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
+import {CombinatorComponent} from "./combinator/combinator.component";
 
 const routes: Routes = [
     {
@@ -13,30 +14,21 @@ const routes: Routes = [
             redirectTo: 'combinator'
           },
           {
+              path: 'charts',
+              loadChildren: './charts/charts.module#ChartsModule'
+          },
+          {
               path: 'combinator',
-              loadChildren: './combinator/dashboard.module#DashboardModule'
+              loadChildren: './combinator/combinator.module#CombinatorModule'
+          },
+          {
+              path: 'resistors',
+              loadChildren: './resistors/resistors.module#ResistorsModule'
+          },
+          {
+              path: 'capacitors',
+              loadChildren: './capacitors/capacitors.module#CapacitorsModule'
           }
-            // {
-            //     path: 'charts',
-            //     loadChildren: './charts/charts.module#ChartsModule'
-            // },
-            // {
-            //     path: 'components',
-            //     loadChildren:
-            //         './material-components/material-components.module#MaterialComponentsModule'
-            // },
-            // {
-            //     path: 'forms',
-            //     loadChildren: './forms/forms.module#FormsModule'
-            // },
-            // {
-            //     path: 'grid',
-            //     loadChildren: './grid/grid.module#GridModule'
-            // },
-            // {
-            //     path: 'tables',
-            //     loadChildren: './tables/tables.module#TablesModule'
-            // }
         ]
     }
 ];
