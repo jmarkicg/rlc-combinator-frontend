@@ -1,0 +1,36 @@
+@import '~material-design-icons/iconfont/material-icons.css';
+
+table {
+  width: 100%;
+}
+
+.mat-table {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+
+}
+.mat-header-cell{
+  padding-top: 22px;
+}
+.mat-cell{
+  font-size: 13px;
+}
+
+td.mat-cell{
+  padding-right: 15px;
+  padding-top: 15px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}

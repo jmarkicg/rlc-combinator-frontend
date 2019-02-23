@@ -6,9 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import {RlcTableComponent} from "./layout/components/rlc-table/rlc-table.component";
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
