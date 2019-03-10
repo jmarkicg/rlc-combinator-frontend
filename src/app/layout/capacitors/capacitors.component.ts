@@ -1,5 +1,5 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA }      from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ElementEnum} from "../../shared/model/element-enum";
 
 @Component({
   selector: 'app-capacitors',
@@ -8,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CapacitorsComponent implements OnInit {
 
+  type: ElementEnum;
+
   constructor() { }
 
   ngOnInit() {
+    this.type = ElementEnum.Capacitor;
   }
 
 }

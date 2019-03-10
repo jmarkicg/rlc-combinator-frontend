@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {CapacitorService} from "../../../shared/services/capacitor.service";
-import {Capacitor} from "../../../shared/model/capacitor";
+import {Component, Input, OnInit} from '@angular/core';
+import {CapacitorService} from "../../shared/services/capacitor.service";
+import {Capacitor} from "../../shared/model/capacitor";
 import {MatTableDataSource} from "@angular/material";
+import {ElementEnum} from "../../shared/model/element-enum";
 
 @Component({
   selector: 'app-rlc-table',
@@ -11,35 +12,35 @@ import {MatTableDataSource} from "@angular/material";
 })
 export class RlcTableComponent implements OnInit {
 
+  @Input() type: ElementEnum;
+
   service: CapacitorService;
   constructor(public capacitorService: CapacitorService) {
     this.service = capacitorService;
   }
 
   dataLoaded: boolean;
-  displayedColumns: string[] = [ 'actions','type', 'value', 'description', 'numItems'];
+  displayedColumns: string[] = [ 'actions', 'type', 'value', 'description', 'numItems'];
   dataSource = null;
 
   ngOnInit() {
-
+    console.log(this.type);
     this.getData();
-
   }
 
   private getData() {
-    this.service.getCapacitors().subscribe((response: Capacitor[]) => {
+    if (this.type == ElementEnum.Capacitor){
+      this.service.getCapacitors().subscribe((response: Capacitor[]) => {
         if (response != null) {
-          console.log(response);
           this.dataLoaded = true;
           this.dataSource = new MatTableDataSource(response);
         }
       });
-  }
+    } else if (this.type == ElementEnum.Resistor){
+      console.log("to do");
+    }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
 
   private create(customer: Capacitor) {
     // this.service.add_customer(customer).subscribe(data => {

@@ -3,19 +3,16 @@ import { CommonModule } from '@angular/common';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {CapacitorsComponent} from "./capacitors.component";
 import {CapacitorsRoutingModule} from "./capacitors-routing.module";
-import {RlcTableComponent} from "../components/rlc-table/rlc-table.component";
-import {MatFormFieldModule, MatTableModule, MatInputModule, MatIconModule} from "@angular/material";
+import {RlcTableComponent} from "../rlc-table/rlc-table.component";
+import {RlcTableModule} from "../rlc-table/rlc-table.module";
 
 @NgModule({
   imports: [
     CommonModule,
     CapacitorsRoutingModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
+    RlcTableModule,
     FlexLayoutModule.withConfig({addFlexToParent: false})
   ],
-  declarations: [CapacitorsComponent, RlcTableComponent]
+  declarations: [CapacitorsComponent]
 })
 export class CapacitorsModule { }

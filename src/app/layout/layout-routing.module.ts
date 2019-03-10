@@ -14,10 +14,6 @@ const routes: Routes = [
             redirectTo: 'combinator'
           },
           {
-              path: 'charts',
-              loadChildren: './charts/charts.module#ChartsModule'
-          },
-          {
               path: 'combinator',
               loadChildren: './combinator/combinator.module#CombinatorModule'
           },

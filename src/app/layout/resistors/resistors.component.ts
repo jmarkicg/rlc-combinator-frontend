@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ElementEnum} from "../../shared/model/element-enum";
 
 @Component({
   selector: 'app-resistors',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResistorsComponent implements OnInit {
 
+  type: ElementEnum;
+
   constructor() { }
 
   ngOnInit() {
+    this.type = ElementEnum.Resistor;
   }
 
 }
