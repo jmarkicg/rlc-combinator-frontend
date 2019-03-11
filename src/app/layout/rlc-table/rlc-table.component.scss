@@ -1,7 +1,7 @@
-@import '../../../../node_modules/material-design-icons/iconfont/material-icons.css';
+//@import '../../../../node_modules/material-design-icons/iconfont/material-icons.css';
 
 table {
-  width: 100%;
+//  width: 100%;
 }
 
 .mat-table {
@@ -9,10 +9,10 @@ table {
 
 }
 .mat-header-cell{
-  padding-top: 22px;
+  padding-top: 5px;
 }
 .mat-cell{
-  font-size: 13px;
+  font-size: 15px;
 }
 
 td.mat-cell{
@@ -27,7 +27,11 @@ td.mat-cell{
 
 td,
 th {
-  width: 25%;
+  width: 200px;
+}
+
+.rlcColumnClass{
+  width: 25px;
 }
 
 .example-button-row button,

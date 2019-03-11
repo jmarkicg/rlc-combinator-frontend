@@ -3,7 +3,7 @@
   <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Type Column -->
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Type</th>
+      <th mat-header-cell *matHeaderCellDef  [ngClass]="'rlcColumnClass'"> Type</th>
       <td mat-cell *matCellDef="let element"> {{element.type}} </td>
     </ng-container>
 
@@ -25,18 +25,30 @@
       <td mat-cell *matCellDef="let element"> {{element.numItems}} </td>
     </ng-container>
 
+    <!-- Capacitory type -->
+    <ng-container matColumnDef="capacitorType">
+      <th mat-header-cell *matHeaderCellDef> Capacitor type </th>
+      <td mat-cell *matCellDef="let element"> {{element.capacitorType}} </td>
+    </ng-container>
+
+    <!-- Volume -->
+    <ng-container matColumnDef="volume">
+      <th mat-header-cell *matHeaderCellDef> Volume </th>
+      <td mat-cell *matCellDef="let element"> {{element.volume}} </td>
+    </ng-container>
+
     <!-- Edit Column -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button (click)="addItem()" >
+        <button mat-icon-button (click)="openDialog(addAction, null)" >
           <mat-icon aria-label="Add">add_circle</mat-icon>
         </button>
       </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button >
+        <button mat-icon-button  (click)="openDialog(editAction, element)" >
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
-        <button mat-icon-button >
+        <button mat-icon-button (click)="deleteElement(element)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </td>

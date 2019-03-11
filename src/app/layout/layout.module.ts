@@ -14,8 +14,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
-import { NavComponent } from './nav/nav.component';
-import {RlcTableComponent} from "./rlc-table/rlc-table.component";
 
 @NgModule({
     imports: [
@@ -32,7 +30,7 @@ import {RlcTableComponent} from "./rlc-table/rlc-table.component";
         MatListModule,
         TranslateModule
     ],
-    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent],
+    declarations: [LayoutComponent, TopnavComponent, SidebarComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class LayoutModule {}

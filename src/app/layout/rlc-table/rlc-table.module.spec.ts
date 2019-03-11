@@ -1,6 +1,6 @@
 import {RlcTableModule} from "./rlc-table.module";
 
-describe('RlcTableModule', () => {
+describe('RlcEditModule', () => {
     let rlcTableModule: RlcTableModule;
 
     beforeEach(() => {

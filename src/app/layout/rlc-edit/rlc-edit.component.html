@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{title}}</mat-card-title>
+  </mat-card-header>
+  <form (ngSubmit)="onSubmit()" #elementForm="ngForm">
+    <mat-form-field>
+      <input matInput [(ngModel)]="element.type" name="type" placeholder="Type" type="text" required>
+    </mat-form-field>
+    <!--<div *ngIf="type.errors.required">-->
+      <!--Type is required.-->
+    <!--</div>-->
+    <mat-form-field>
+      <input matInput [(ngModel)]="element.value" name="value" placeholder="Value" type="number" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="element.description" name="description" placeholder="Description" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="element.numItems" name="numItems" placeholder="Number of items" type="number" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="data.type == capacitorType">
+      <input matInput [(ngModel)]="element.capacitorType" name="capacitorType" placeholder="Capacitor type" type="text">
+    </mat-form-field>
+    <mat-form-field *ngIf="data.type == resistorType">
+      <input matInput [(ngModel)]="element.volume" name="volume" placeholder="Volume" type="number">
+    </mat-form-field>
+
+    <br>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!elementForm.form.valid">Save</button>
+    <button mat-raised-button type="reset" (click)="cancel()">Cancel</button>
+  </form>
+</mat-card>

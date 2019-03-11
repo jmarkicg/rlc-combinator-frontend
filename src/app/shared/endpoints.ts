@@ -6,7 +6,11 @@ export function endpoints() {
       rlc : {
         api: restApiEndpoint,
       capacitorsList : restApiEndpoint + '/capacitor/list',
-      resistorsList : restApiEndpoint + '/resistor/list'
+      resistorsList : restApiEndpoint + '/resistor/list',
+      resistorSave : restApiEndpoint + '/resistor/save',
+      resistorDelete : restApiEndpoint + '/resistor/delete',
+      capacitorSave : restApiEndpoint + '/capacitor/save',
+      capacitorDelete : restApiEndpoint + '/capacitor/delete',
       }
   };
 }

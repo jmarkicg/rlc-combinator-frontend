@@ -1,22 +1,35 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CapacitorService} from "../../shared/services/capacitor.service";
 import {Capacitor} from "../../shared/model/capacitor";
-import {MatTableDataSource} from "@angular/material";
 import {ElementEnum} from "../../shared/model/element-enum";
+import {RlcEditComponent} from "../rlc-edit/rlc-edit.component";
+import {MatDialog, MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import {ActionsEnum} from "../../shared/model/actions-enum";
+import {ResistorService} from "../../shared/services/resistor.service";
+import {Resistor} from "../../shared/model/resistor";
+import {BaseElement} from "../../shared/model/base-element";
 
 @Component({
   selector: 'app-rlc-table',
   templateUrl: './rlc-table.component.html',
   styleUrls: ['./rlc-table.component.scss'],
-  providers: [CapacitorService]
+  providers: [CapacitorService, ResistorService]
 })
 export class RlcTableComponent implements OnInit {
 
   @Input() type: ElementEnum;
 
-  service: CapacitorService;
-  constructor(public capacitorService: CapacitorService) {
-    this.service = capacitorService;
+  animal: string;
+  name: string;
+  addAction: ActionsEnum = ActionsEnum.ADD;
+  editAction: ActionsEnum = ActionsEnum.EDIT;
+
+  cservice: CapacitorService;
+  rservice: ResistorService;
+  constructor(public capacitorService: CapacitorService, public resistorService: ResistorService, public dialog: MatDialog,
+              private snackBar: MatSnackBar) {
+    this.cservice = capacitorService;
+    this.rservice = resistorService;
   }
 
   dataLoaded: boolean;
@@ -24,58 +37,67 @@ export class RlcTableComponent implements OnInit {
   dataSource = null;
 
   ngOnInit() {
-    console.log(this.type);
+    if (this.type == ElementEnum.Capacitor) {
+      this.displayedColumns = [ 'actions', 'type', 'value', 'description', 'numItems', 'capacitorType'];
+    } else{
+      this.displayedColumns = [ 'actions', 'type', 'value', 'description', 'numItems', 'volume'];
+    }
     this.getData();
   }
 
   private getData() {
     if (this.type == ElementEnum.Capacitor){
-      this.service.getCapacitors().subscribe((response: Capacitor[]) => {
+      this.cservice.getCapacitors().subscribe((response: Capacitor[]) => {
         if (response != null) {
           this.dataLoaded = true;
           this.dataSource = new MatTableDataSource(response);
         }
       });
     } else if (this.type == ElementEnum.Resistor){
-      console.log("to do");
+      this.rservice.getResistors().subscribe((response: Resistor[]) => {
+        if (response != null) {
+          this.dataLoaded = true;
+          this.dataSource = new MatTableDataSource(response);
+        }
+      });
     }
 
   }
 
-  private create(customer: Capacitor) {
-    // this.service.add_customer(customer).subscribe(data => {
-    //   this.get();
-    //
-    // });
-  }
-  private update(customer: Capacitor) {
-    // this.service.update_customer(customer).subscribe(data => {
-    //
-    // });
-  }
-  private delete(id: number) {
-    // this.service.delete_customer(id).subscribe(data => {
-    //
-    // });
+  openDialog(action: ActionsEnum, elem: any): void {
+    let elem1 = Object.assign({}, elem);
+    const dialogRef = this.dialog.open(RlcEditComponent, {
+      width: '350px',
+      data: { type: this.type, element: elem1, action: action}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     this.getData();
+    });
   }
 
-  private action(row: any) {
-
-    if (row.operation === 'added') {
-      this.create(row);
-      // this.yourMessage.push('success', row.firstName + ' has been added successfully!')
-      // this.yourMessage = []
-    }
-    if (row.operation === 'updated') {
-      this.update(row);
-      // this.yourMessage.push('success', row.firstName + ' has been updated successfully!')
-      // this.yourMessage = []
-    }
-    if (row.operation === 'deleted') {
-      this.delete(row.id);
-      // this.yourMessage.push('success', ' has been deleted successfully!')
-      // this.yourMessage = []
+  deleteElement(element: BaseElement){
+    if (this.type == ElementEnum.Capacitor){
+      this.cservice.deleteOne(element._id).subscribe(
+        (response) => {},
+        err => this.handleError(),
+        () => this.handleSucess());
+    } else if (this.type == ElementEnum.Resistor){
+      this.rservice.deleteOne(element._id).subscribe(
+        (response) => {},
+        err => this.handleError(),
+        () => this.handleSucess());
     }
 
   }
+
+  public handleSucess(){
+    this.snackBar.open('Successfully deleted.', 'SUCCESS', { duration: 2000, verticalPosition: 'top' });
+    this.getData();
+  }
+
+  public handleError(){
+    this.snackBar.open('Error occured!', 'ERROR', { duration: 2000, verticalPosition: 'top'});
+  }
+
 }

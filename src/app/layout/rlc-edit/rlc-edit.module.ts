@@ -7,11 +7,11 @@ import {
   MatInputModule,
   MatIconModule,
   MatButtonModule,
-  MatDialogModule
+  MatCardModule, MatSnackBar, MatSnackBarModule
 } from "@angular/material";
-import {RlcTableComponent} from "./rlc-table.component";
 import {LayoutModule} from "../layout.module";
-import {RlcEditModule} from "../rlc-edit/rlc-edit.module";
+import {RlcEditComponent} from "./rlc-edit.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -25,11 +25,13 @@ import {RlcEditModule} from "../rlc-edit/rlc-edit.module";
     MatFormFieldModule,
     LayoutModule,
     CommonModule,
-    MatDialogModule,
-    RlcEditModule,
+    MatCardModule,
+    FormsModule,
+    MatSnackBarModule,
     FlexLayoutModule.withConfig({addFlexToParent: false})
   ],
-  exports: [RlcTableComponent],
-  declarations: [RlcTableComponent]
+  exports: [RlcEditComponent],
+  declarations: [RlcEditComponent],
+  entryComponents: [RlcEditComponent]
 })
-export class RlcTableModule { }
+export class RlcEditModule { }
