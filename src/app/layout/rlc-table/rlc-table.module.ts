@@ -7,11 +7,12 @@ import {
   MatInputModule,
   MatIconModule,
   MatButtonModule,
-  MatDialogModule
+  MatDialogModule, MatSortModule
 } from "@angular/material";
 import {RlcTableComponent} from "./rlc-table.component";
 import {LayoutModule} from "../layout.module";
 import {RlcEditModule} from "../rlc-edit/rlc-edit.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {RlcEditModule} from "../rlc-edit/rlc-edit.module";
     CommonModule,
     MatDialogModule,
     RlcEditModule,
+    MatSortModule,
     FlexLayoutModule.withConfig({addFlexToParent: false})
   ],
   exports: [RlcTableComponent],

@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CapacitorService} from "../../shared/services/capacitor.service";
 import {Capacitor} from "../../shared/model/capacitor";
 import {ElementEnum} from "../../shared/model/element-enum";
 import {RlcEditComponent} from "../rlc-edit/rlc-edit.component";
-import {MatDialog, MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import {MatDialog, MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatSort} from '@angular/material';
 import {ActionsEnum} from "../../shared/model/actions-enum";
 import {ResistorService} from "../../shared/services/resistor.service";
 import {Resistor} from "../../shared/model/resistor";
@@ -18,6 +18,8 @@ import {BaseElement} from "../../shared/model/base-element";
 export class RlcTableComponent implements OnInit {
 
   @Input() type: ElementEnum;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   animal: string;
   name: string;
@@ -48,20 +50,24 @@ export class RlcTableComponent implements OnInit {
   private getData() {
     if (this.type == ElementEnum.Capacitor){
       this.cservice.getCapacitors().subscribe((response: Capacitor[]) => {
-        if (response != null) {
-          this.dataLoaded = true;
-          this.dataSource = new MatTableDataSource(response);
-        }
+        this.handleElemRetrieval(response);
+
       });
     } else if (this.type == ElementEnum.Resistor){
       this.rservice.getResistors().subscribe((response: Resistor[]) => {
-        if (response != null) {
-          this.dataLoaded = true;
-          this.dataSource = new MatTableDataSource(response);
-        }
+        this.handleElemRetrieval(response);
       });
     }
+  }
 
+  handleElemRetrieval(response: any){
+    if (response != null) {
+      this.dataLoaded = true;
+      this.dataSource = new MatTableDataSource(response);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+      });
+    }
   }
 
   openDialog(action: ActionsEnum, elem: any): void {
