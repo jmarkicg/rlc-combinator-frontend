@@ -1,1 +1,34 @@
-TEST PAGE
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Combinator</mat-card-title>
+  </mat-card-header>
+  <form (ngSubmit)="onSubmit()" #elementForm="ngForm">
+    <mat-form-field>
+      <mat-label>Circuit type</mat-label>
+      <mat-select  matInput [(ngModel)]="combModel.type" name="type">
+                <mat-option *ngFor="let elt of types" [value]="elt">
+          {{elt}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="combModel.requestedValue" name="requestedValue" placeholder="Requested value" type="number" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="combModel.allowedErrorPercentage" name="allowedErrorPercentage" placeholder="Allowed error percentage" type="number" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="combModel.numGeneratedItems" name="numGeneratedItems" placeholder="Max. num of results" type="number" required>
+    </mat-form-field>
+
+    <br/>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!elementForm.form.valid">Generate combinations</button>
+
+    <br/> <br/>
+    <mat-progress-bar mode="indeterminate" *ngIf="loading" ></mat-progress-bar>
+    <mat-tab-group *ngIf="submitted" [selectedIndex]="selected">
+      <mat-tab label="Progress"> <div [innerHTML]="consoleLog"></div></mat-tab>
+      <mat-tab label="Combinations"> {{combinations}}</mat-tab>
+    </mat-tab-group>
+  </form>
+</mat-card>
