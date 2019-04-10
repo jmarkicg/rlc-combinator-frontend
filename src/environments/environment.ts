@@ -4,7 +4,13 @@
 
 export const environment = {
   production: false,
-  restApiEndpoint: 'http://localhost:8080/api'
+  restApiEndpoint: 'http://localhost:8080/api',
+  pusher: {
+    key: 'fc5ff8717b2e8cdd4283',
+    cluster: 'eu',
+    channel: 'rlc-combinator',
+    event: 'rlc-comb-event'
+  }
 };
 
 /*
