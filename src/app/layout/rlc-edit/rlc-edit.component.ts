@@ -58,7 +58,6 @@ export class RlcEditComponent implements OnInit {
     }
 
     this.element = this.data.element;
-
     if (this.data.type == ElementEnum.Capacitor){
       this.title += ' capacitor';
       if (this.data.action == ActionsEnum.ADD){

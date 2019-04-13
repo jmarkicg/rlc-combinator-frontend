@@ -7,7 +7,7 @@ import {
   MatInputModule,
   MatIconModule,
   MatButtonModule,
-  MatCardModule, MatSnackBar, MatSnackBarModule
+  MatCardModule, MatSnackBarModule
 } from "@angular/material";
 import {LayoutModule} from "../layout.module";
 import {RlcEditComponent} from "./rlc-edit.component";
@@ -15,7 +15,6 @@ import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
-    CommonModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,

@@ -8,7 +8,8 @@ import {CombinatorService} from "../../shared/services/combinator.service";
 @Component({
   selector: 'app-combinator',
   templateUrl: './combinator.component.html',
-  styleUrls: ['./combinator.component.scss']
+  styleUrls: ['./combinator.component.scss'],
+  providers: [PusherService, CombinatorService]
 })
 export class CombinatorComponent implements OnInit {
 
