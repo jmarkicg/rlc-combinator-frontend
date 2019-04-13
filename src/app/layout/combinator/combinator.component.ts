@@ -4,6 +4,7 @@ import {CombinatorModel} from "../../shared/model/combinator-model";
 import {PusherService} from "../../shared/services/pusher.service";
 import {environment} from "../../../environments/environment";
 import {CombinatorService} from "../../shared/services/combinator.service";
+import {CombinationModel} from "../../shared/model/combination-model";
 
 @Component({
   selector: 'app-combinator',
@@ -19,7 +20,7 @@ export class CombinatorComponent implements OnInit {
   combModel: CombinatorModel;
 
   consoleLog: string = "";
-  combinations: any ;
+  combinations: CombinationModel[] ;
 
   submitted: boolean = false;
   loading: boolean = false;
@@ -50,8 +51,7 @@ export class CombinatorComponent implements OnInit {
     this.loading = true;
     this.selected = 0;
     this.consoleLog ="";
-    this.combinatorService.getCombinations(this.combModel).subscribe((response: any[]) => {
-      console.log(response);
+    this.combinatorService.getCombinations(this.combModel).subscribe((response: CombinationModel[]) => {
       this.combinations = response;
       this.selected = 1;
       this.loading = false;
@@ -59,9 +59,8 @@ export class CombinatorComponent implements OnInit {
   }
 
   subScribeToLogs() {
-    this.pusherService.channel.bind(environment.pusher.event, data => {
-      this.consoleLog += data;
-      this.consoleLog += "<br/>";
+    this.pusherService.channel.bind(environment.pusher.event, data => {;
+      this.consoleLog = data + "<br/>" + this.consoleLog
     });
   }
 

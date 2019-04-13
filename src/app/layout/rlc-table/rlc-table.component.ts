@@ -3,7 +3,7 @@ import {CapacitorService} from "../../shared/services/capacitor.service";
 import {Capacitor} from "../../shared/model/capacitor";
 import {ElementEnum} from "../../shared/model/element-enum";
 import {RlcEditComponent} from "../rlc-edit/rlc-edit.component";
-import {MatDialog, MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatSort} from '@angular/material';
+import {MatDialog, MatTableDataSource, MatSnackBar, MatSort} from '@angular/material';
 import {ActionsEnum} from "../../shared/model/actions-enum";
 import {ResistorService} from "../../shared/services/resistor.service";
 import {Resistor} from "../../shared/model/resistor";
@@ -21,8 +21,6 @@ export class RlcTableComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  animal: string;
-  name: string;
   addAction: ActionsEnum = ActionsEnum.ADD;
   editAction: ActionsEnum = ActionsEnum.EDIT;
 

@@ -6,6 +6,7 @@ import {Capacitor} from "../model/capacitor";
 import {map} from "rxjs/operators";
 import {CombinatorModel} from "../model/combinator-model";
 import {ElementEnum} from "../model/element-enum";
+import {CombinationModel} from "../model/combination-model";
 
 @Injectable()
 export class CombinatorService  {
@@ -14,10 +15,10 @@ export class CombinatorService  {
     private httpClient: HttpClient){
   }
 
-  getCombinations(comb: CombinatorModel): Observable<any[]> {
+  getCombinations(comb: CombinatorModel): Observable<CombinationModel[]> {
     let url = endpoints().rlc.combinatorGenerate + '/' + comb.requestedValue
-      + '/5/' + comb.allowedErrorPercentage  + '/' + ElementEnum[comb.type];
-    return this.httpClient.get<any[]>(url);
+      + '/' + comb.numGeneratedItems + '/' + comb.allowedErrorPercentage  + '/' + ElementEnum[comb.type];
+    return this.httpClient.get<CombinationModel[]>(url);
   }
 
 }

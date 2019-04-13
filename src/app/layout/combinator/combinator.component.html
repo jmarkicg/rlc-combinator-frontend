@@ -28,7 +28,10 @@
     <mat-progress-bar mode="indeterminate" *ngIf="loading" ></mat-progress-bar>
     <mat-tab-group *ngIf="submitted" [selectedIndex]="selected">
       <mat-tab label="Progress"> <div [innerHTML]="consoleLog"></div></mat-tab>
-      <mat-tab label="Combinations"> {{combinations}}</mat-tab>
+      <mat-tab label="Combinations">
+        <app-combinations [combinations]="combinations" *ngIf="!loading"></app-combinations>
+        <p *ngIf="loading">Data is being prepared...</p>
+      </mat-tab>
     </mat-tab-group>
   </form>
 </mat-card>

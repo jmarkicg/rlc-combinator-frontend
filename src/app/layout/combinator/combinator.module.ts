@@ -10,14 +10,19 @@ import {
   MatInputModule,
   MatSelectModule,
   MatTabsModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule
 } from "@angular/material";
 import {FormsModule} from "@angular/forms";
+import {CombinationsComponent} from "./combinations/combinations.component";
 
 @NgModule({
   imports: [
     CommonModule,
     MatProgressBarModule,
+    MatPaginatorModule,
     CombinatorRoutingModule,
     MatSelectModule,
     MatCardModule,
@@ -25,9 +30,11 @@ import {FormsModule} from "@angular/forms";
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
+    MatTableModule,
     FormsModule,
+    MatSortModule
     FlexLayoutModule.withConfig({addFlexToParent: false})
   ],
-  declarations: [CombinatorComponent]
+  declarations: [CombinatorComponent, CombinationsComponent]
 })
 export class CombinatorModule { }
