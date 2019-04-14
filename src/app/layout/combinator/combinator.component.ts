@@ -31,7 +31,8 @@ export class CombinatorComponent implements OnInit {
   ngOnInit() {
     this.combModel = new CombinatorModel();
     this.combModel.allowedErrorPercentage = 5;
-    this.combModel.numGeneratedItems = 20;
+    this.combModel.maxNumGeneratedItems = 20;
+    this.combModel.minNumGeneratedItems = 1;
     this.combModel.requestedValue = 50;
     this.getEnumKeys();
     this.subScribeToLogs();

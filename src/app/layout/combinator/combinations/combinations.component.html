@@ -1,5 +1,4 @@
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="errorPercentage"
-       matSortDirection="asc" style="width:100%">
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width:100%">
   <!-- Error percentage Column -->
   <ng-container matColumnDef="errorPercentage">
     <th mat-header-cell *matHeaderCellDef  [ngClass]="'rlcColumnClass'" mat-sort-header> Error percentage</th>
@@ -28,4 +27,4 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
-<mat-paginator [length]="count" [pageSize]="10"></mat-paginator>
+<mat-paginator [length]="count" [pageSize]="20"></mat-paginator>

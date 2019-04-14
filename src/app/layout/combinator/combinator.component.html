@@ -18,7 +18,10 @@
       <input matInput [(ngModel)]="combModel.allowedErrorPercentage" name="allowedErrorPercentage" placeholder="Allowed error percentage" type="number" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="combModel.numGeneratedItems" name="numGeneratedItems" placeholder="Max. num of results" type="number" required>
+      <input matInput [(ngModel)]="combModel.minNumGeneratedItems" name="minNumGeneratedItems" placeholder="Min. num of results" type="number" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="combModel.maxNumGeneratedItems" name="maxNumGeneratedItems" placeholder="Max. num of results" type="number" required>
     </mat-form-field>
 
     <br/>

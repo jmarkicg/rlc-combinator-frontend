@@ -17,7 +17,7 @@ export class CombinatorService  {
 
   getCombinations(comb: CombinatorModel): Observable<CombinationModel[]> {
     let url = endpoints().rlc.combinatorGenerate + '/' + comb.requestedValue
-      + '/' + comb.numGeneratedItems + '/' + comb.allowedErrorPercentage  + '/' + ElementEnum[comb.type];
+      + '/' + comb.minNumGeneratedItems + '/' + comb.maxNumGeneratedItems + '/' + comb.allowedErrorPercentage  + '/' + ElementEnum[comb.type];
     return this.httpClient.get<CombinationModel[]>(url);
   }
 

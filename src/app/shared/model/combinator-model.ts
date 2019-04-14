@@ -2,5 +2,6 @@ export class CombinatorModel {
   type: string;
   requestedValue: number;
   allowedErrorPercentage: number;
-  numGeneratedItems: number;
+  maxNumGeneratedItems: number;
+  minNumGeneratedItems: number;
 }
