@@ -1,5 +1,5 @@
 export class BaseElement {
-  _id: string;
+  id: number;
   type: string;
   value: number;
   description: string;

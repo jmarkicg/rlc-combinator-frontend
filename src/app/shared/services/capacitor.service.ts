@@ -20,8 +20,8 @@ export class CapacitorService  {
     return this.httpClient.post<Capacitor>(endpoints().rlc.capacitorSave, capacitor);
   }
 
-  deleteOne(_id: string) {
-    return this.httpClient.delete<any>(endpoints().rlc.capacitorDelete + '/' + _id).pipe(map(data => data));
+  deleteOne(id: number) {
+    return this.httpClient.delete<any>(endpoints().rlc.capacitorDelete + '/' + id).pipe(map(data => data));
   }
 
 }

@@ -32,7 +32,7 @@ import {CombinationsComponent} from "./combinations/combinations.component";
     MatInputModule,
     MatTableModule,
     FormsModule,
-    MatSortModule
+    MatSortModule,
     FlexLayoutModule.withConfig({addFlexToParent: false})
   ],
   declarations: [CombinatorComponent, CombinationsComponent]

@@ -82,12 +82,12 @@ export class RlcTableComponent implements OnInit {
 
   deleteElement(element: BaseElement){
     if (this.type == ElementEnum.Capacitor){
-      this.cservice.deleteOne(element._id).subscribe(
+      this.cservice.deleteOne(element.id).subscribe(
         (response) => {},
         err => this.handleError(),
         () => this.handleSucess());
     } else if (this.type == ElementEnum.Resistor){
-      this.rservice.deleteOne(element._id).subscribe(
+      this.rservice.deleteOne(element.id).subscribe(
         (response) => {},
         err => this.handleError(),
         () => this.handleSucess());

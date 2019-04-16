@@ -21,8 +21,8 @@ export class ResistorService  {
     return this.httpClient.post<Resistor>(endpoints().rlc.resistorSave, resistor);
   }
 
-  deleteOne(_id: string) {
-    return this.httpClient.delete<any>(endpoints().rlc.resistorDelete + '/' + _id).pipe(map(data => data));
+  deleteOne(id: number) {
+    return this.httpClient.delete<any>(endpoints().rlc.resistorDelete + '/' + id).pipe(map(data => data));
   }
 
 }
