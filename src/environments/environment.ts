@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  restApiEndpoint: 'http://localhost:8080/api',
+  restApiEndpoint: 'http://localhost:5000/api',
+  //restApiEndpoint: 'http://rlcbackend-env.dfkby3hm8v.eu-central-1.elasticbeanstalk.com/api',
+  //restApiEndpoint: 'https://api.rlc-combinator.com/api',
   pusher: {
     key: 'fc5ff8717b2e8cdd4283',
     cluster: 'eu',
@@ -12,7 +14,6 @@ export const environment = {
     event: 'rlc-comb-event'
   }
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

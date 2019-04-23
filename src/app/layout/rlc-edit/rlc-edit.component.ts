@@ -71,11 +71,11 @@ export class RlcEditComponent implements OnInit {
     }
   }
 
-  private cancel() {
+  cancel() {
     this.dialogRef.close();
   }
 
-  private onSubmit() {
+  onSubmit() {
     if (this.data.type == ElementEnum.Capacitor){
       this.cservice.saveOne(this.element).subscribe(
         (response: Capacitor) => {},

@@ -1,0 +1,12 @@
+{
+  "serverless": {
+    "provider": "aws",
+    "project": "ng-material",
+    "skipInstall": false,
+    "directory": ".",
+    "serverless": {
+      "aws": {},
+      "gcloud": {}
+    }
+  }
+}
