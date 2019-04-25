@@ -2,6 +2,7 @@ import {environment} from "../../environments/environment";
 
 export function endpoints() {
   const restApiEndpoint = environment.restApiEndpoint;
+  const restAuthEndpoint = environment.restAuthEndpoint;
   return{
       rlc : {
         api: restApiEndpoint,
@@ -11,7 +12,8 @@ export function endpoints() {
         resistorDelete : restApiEndpoint + '/resistor/delete',
         capacitorSave : restApiEndpoint + '/capacitor/save',
         capacitorDelete : restApiEndpoint + '/capacitor/delete',
-        combinatorGenerate: restApiEndpoint + '/combinator/combinations'
+        combinatorGenerate: restApiEndpoint + '/combinator/combinations',
+        login: restAuthEndpoint + '/login'
       }
   };
 }
