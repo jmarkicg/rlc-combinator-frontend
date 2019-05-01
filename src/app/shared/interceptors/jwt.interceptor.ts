@@ -1,4 +1,3 @@
-import {catchError, mergeMap } from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {Injectable, Injector} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
@@ -17,13 +16,15 @@ export class JwtInterceptor implements HttpInterceptor {
 
   constructor(
     private injector: Injector,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    //console.log(request);
     const authService = this.injector.get(AuthService);
     // add authorization header with jwt token if available
-    let accessToken = localStorage.getItem('access_token');
+    let accessToken = authService.getAccessToken();
     console.log(accessToken);
     if (accessToken) {
       request = request.clone({
@@ -32,7 +33,7 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       });
     }
-
+    console.log(request);
     return next.handle(request);
  /*   return next
       .handle(request)

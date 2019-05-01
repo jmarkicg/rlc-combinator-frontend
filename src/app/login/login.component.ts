@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
           .subscribe(
             () => {
               console.log("User is logged in");
-              localStorage.setItem('access_token', 'true');
               this.router.navigate(['/combinator']);
             }
           );
@@ -41,11 +40,11 @@ export class LoginComponent implements OnInit {
     }
 
   logout() {
-    localStorage.removeItem('access_token');
+    this.authService.logout();
   }
 
   public get loggedIn(): boolean{
-    return localStorage.getItem('access_token') !==  null;
+    return this.authService.isLoggedIn();
   }
 /*
   register(email:string, password:string) {

@@ -47,14 +47,14 @@ export class RlcTableComponent implements OnInit {
 
   private getData() {
     if (this.type == ElementEnum.Capacitor){
-      this.cservice.getCapacitors().subscribe((response: Capacitor[]) => {
-        this.handleElemRetrieval(response);
-
-      });
+      this.cservice.getCapacitors().subscribe(
+        (response: Capacitor[]) => this.handleElemRetrieval(response),
+        err => this.handleError('Error occured while retrieving data.'));
     } else if (this.type == ElementEnum.Resistor){
-      this.rservice.getResistors().subscribe((response: Resistor[]) => {
-        this.handleElemRetrieval(response);
-      });
+      this.rservice.getResistors().subscribe(
+        (response: Resistor[]) =>  this.handleElemRetrieval(response),
+        err => this.handleError('Error occured while retrieving data.')
+      );
     }
   }
 
@@ -84,24 +84,32 @@ export class RlcTableComponent implements OnInit {
     if (this.type == ElementEnum.Capacitor){
       this.cservice.deleteOne(element.id).subscribe(
         (response) => {},
-        err => this.handleError(),
-        () => this.handleSucess());
+        err => this.handleError(null),
+        () => this.handleSucess('Successfully deleted.'));
     } else if (this.type == ElementEnum.Resistor){
       this.rservice.deleteOne(element.id).subscribe(
         (response) => {},
-        err => this.handleError(),
-        () => this.handleSucess());
+        err => this.handleError(null),
+        () => this.handleSucess('Successfully deleted.'));
     }
 
   }
 
-  public handleSucess(){
-    this.snackBar.open('Successfully deleted.', 'SUCCESS', { duration: 2000, verticalPosition: 'top' });
+  public handleSucess(msg: string){
+    let message = 'Operation performed successfully.';
+    if (msg != null){
+      message = msg;
+    }
+    this.snackBar.open(message, 'SUCCESS', { duration: 2000, verticalPosition: 'top' });
     this.getData();
   }
 
-  public handleError(){
-    this.snackBar.open('Error occured!', 'ERROR', { duration: 2000, verticalPosition: 'top'});
+  public handleError(msg: string){
+    let message = 'Error occured!';
+    if (msg != null){
+      message = msg;
+    }
+    this.snackBar.open(message, 'ERROR', { duration: 2000, verticalPosition: 'top'});
   }
 
 }
