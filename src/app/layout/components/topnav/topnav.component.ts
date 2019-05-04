@@ -32,9 +32,8 @@ export class TopnavComponent implements OnInit {
         dom.classList.toggle(this.pushRightClass);
     }
 
-    onLoggedout() {
+    onLoggedOut() {
       this.authService.logout();
-      this.router.navigate(['/login']);
     }
 
 }

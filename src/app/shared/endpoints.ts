@@ -13,7 +13,8 @@ export function endpoints() {
         capacitorSave : restApiEndpoint + '/capacitor/save',
         capacitorDelete : restApiEndpoint + '/capacitor/delete',
         combinatorGenerate: restApiEndpoint + '/combinator/combinations',
-        login: restAuthEndpoint + '/login'
+        login: restAuthEndpoint + '/login',
+        refreshToken: restAuthEndpoint + '/refreshToken'
       }
   };
 }

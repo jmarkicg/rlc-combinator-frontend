@@ -95,7 +95,7 @@ export class RlcEditComponent implements OnInit {
   }
 
   public handleError(){
-    this.snackBar.open('Error occured!', 'ERROR', { duration: 2000, verticalPosition: 'top'});
+    this.snackBar.open('Error occurred!', 'ERROR', { duration: 2000, verticalPosition: 'top'});
   }
 
 }

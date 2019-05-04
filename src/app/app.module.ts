@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
+import { JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
+import { MatSnackBarModule } from "@angular/material";
 
 @NgModule({
     declarations: [AppComponent],
@@ -16,7 +17,8 @@ import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
         BrowserAnimationsModule,
         LayoutModule,
         OverlayModule,
-        HttpClientModule
+        HttpClientModule,
+        MatSnackBarModule
     ],
     providers: [ {
       provide: HTTP_INTERCEPTORS,

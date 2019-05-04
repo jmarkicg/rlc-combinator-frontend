@@ -29,7 +29,7 @@
             <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
                 <div fxFlexFill>
                     <button  type="submit" mat-raised-button color="primary" class="w-100"
-                             [disabled]="!elementForm.form.valid">Login</button>
+                             [disabled]="!elementForm.form.valid || loginInProgress">Login</button>
                 </div>
             </div>
 

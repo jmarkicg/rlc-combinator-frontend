@@ -4,6 +4,8 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Router} from '@angular/router';
 import {endpoints} from "../endpoints";
 import {AuthService} from "../services/auth.service";
+import {catchError} from 'rxjs/operators';
+import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 
 @Injectable({
   providedIn: 'root'
@@ -11,30 +13,117 @@ import {AuthService} from "../services/auth.service";
 export class JwtInterceptor implements HttpInterceptor {
 
   private noAuthUrls = [
-    endpoints().rlc.login
+    endpoints().rlc.login,
+    endpoints().rlc.refreshToken
   ];
 
   constructor(
-    private injector: Injector,
+   // private injector: Injector,
     private router: Router,
     private authService: AuthService
   ) {}
 
+
+  private authRequest(request, authToken) {
+    return authToken != ''?request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${authToken}`
+      }
+    }) : request;
+  }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    //console.log(request);
-    const authService = this.injector.get(AuthService);
-    // add authorization header with jwt token if available
-    let accessToken = authService.getAccessToken();
-    console.log(accessToken);
-    if (accessToken) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      });
-    }
-    console.log(request);
-    return next.handle(request);
+    if (request.url.includes("auth/")){
+      return next.handle(request);
+    } else {
+      console.log(request);
+      let accessToken = this.authService.getAccessToken();
+      let req = this.authRequest(request, accessToken);
+      return next.handle(req).pipe(
+          catchError(err => {return new EmptyObservable()}
+            //{
+            //return "fdfsd";
+          //testconsole.log('unathorized');
+              // if (error.status === 401) {
+              //   console.log('unathorized');
+              //   // attempting to refresh our token
+              //   this.authService.refreshAccessToken().pipe().subscribe(
+              //     res => {  console.log('got access token.');
+              //                    //return next.handle(this.authRequest(request, res.access_token))
+              //        } );
+              // }
+           // }
+          ));
+      }
+
+  }
+  //const authService = this.injector.get(AuthService);
+  //skip if we're retrieving accessToken by refreshToken
+  // if (request.url.includes("auth/")){
+  //   return next.handle(request);
+  // } else {
+  //   console.log(request);
+  //   let accessToken = this.authService.getAccessToken();
+  //   if (!this.authService.isTokenValid()) {
+  //     this.authService.refreshAccessToken().pipe().subscribe(
+  //       res => accessToken = res.access_token);
+  //   }
+  //   return next.handle(this.authRequest(request, accessToken));
+  //
+  //   let accessToken = this.authService.getAccessToken();
+  //   let req = this.authRequest(request, accessToken);
+  //   return next.handle(req)
+  //     .catchError(error => {
+  //       if (error instanceof HttpErrorResponse && error.status == 404) {
+  //         this.router.navigateByUrl('/not-found', {replaceUrl: true});
+  //
+  //         return new EmptyObservable();
+  //       }
+  //       else
+  //         return _throw(error);
+  //     });
+  // }
+  //   return next.handle(req).pipe(
+  //     catch(error => {
+  //         // checks if a url is to an admin api or not
+  //         if (error.status === 401) {
+  //           // attempting to refresh our token
+  //         }
+  //       }
+  //     ));
+  // }
+  // }
+  //
+
+    //   return next.handle(authReq).pipe(
+    //     catchError(error => {
+    //       // checks if a url is to an admin api or not
+    //       if (error.status === 401) {
+    //         // attempting to refresh our token
+    //       }
+    //     }
+    // });
+    //
+    //
+    //   if (!valid){
+    //     this.authService.refreshAccessToken().subscribe(
+    //       (response: AuthModel) => accessToken = response.access_token);
+    //   }
+    //
+    //   if (accessToken) {
+    //     // add authorization header with jwt token if available
+    //     request = request.clone({
+    //       setHeaders: {
+    //         Authorization: `Bearer ${accessToken}`
+    //       }
+    //     });
+    //   }
+    //
+    // }
+    // return next.handle(request);
+
+
+
  /*   return next
       .handle(request)
       .pipe(
@@ -56,23 +145,7 @@ export class JwtInterceptor implements HttpInterceptor {
           }
           return observableThrowError(error);
         }));*/
-  }
 
 
-  private goToLogin() {
-    this.router.navigate(['/login']);
-  }
-
-  private goToError() {
-    this.router.navigate(['/error']);
-  }
-
-  private authRequest(request, authToken) {
-    return request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${authToken}`
-      }
-    });
-  }
 
 }

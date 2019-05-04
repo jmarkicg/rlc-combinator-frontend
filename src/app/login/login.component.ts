@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
     username: string;
     password: string;
 
+    loginInProgress: boolean = false;
+
     constructor(private authService: AuthService,
                 private router: Router) {}
 
@@ -29,11 +31,12 @@ export class LoginComponent implements OnInit {
 
     onLogin() {
       if (this.username && this.password) {
+        this.loginInProgress = true;
         this.authService.login(this.username, this.password)
           .subscribe(
             () => {
-              console.log("User is logged in");
               this.router.navigate(['/combinator']);
+              this.loginInProgress = false;
             }
           );
       }

@@ -8,12 +8,13 @@ import {ActionsEnum} from "../../shared/model/actions-enum";
 import {ResistorService} from "../../shared/services/resistor.service";
 import {Resistor} from "../../shared/model/resistor";
 import {BaseElement} from "../../shared/model/base-element";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-rlc-table',
   templateUrl: './rlc-table.component.html',
   styleUrls: ['./rlc-table.component.scss'],
-  providers: [CapacitorService, ResistorService]
+  providers: [CapacitorService, ResistorService, AuthService]
 })
 export class RlcTableComponent implements OnInit {
 
@@ -26,8 +27,8 @@ export class RlcTableComponent implements OnInit {
 
   cservice: CapacitorService;
   rservice: ResistorService;
-  constructor(public capacitorService: CapacitorService, public resistorService: ResistorService, public dialog: MatDialog,
-              private snackBar: MatSnackBar) {
+  constructor(public capacitorService: CapacitorService, public resistorService: ResistorService,
+              public dialog: MatDialog, private snackBar: MatSnackBar, public authService: AuthService) {
     this.cservice = capacitorService;
     this.rservice = resistorService;
   }
@@ -49,11 +50,11 @@ export class RlcTableComponent implements OnInit {
     if (this.type == ElementEnum.Capacitor){
       this.cservice.getCapacitors().subscribe(
         (response: Capacitor[]) => this.handleElemRetrieval(response),
-        err => this.handleError('Error occured while retrieving data.'));
+        err => this.handleError('Error occurred while retrieving data.', err));
     } else if (this.type == ElementEnum.Resistor){
       this.rservice.getResistors().subscribe(
         (response: Resistor[]) =>  this.handleElemRetrieval(response),
-        err => this.handleError('Error occured while retrieving data.')
+        err => this.handleError('Error occurred while retrieving data.', err)
       );
     }
   }
@@ -84,18 +85,18 @@ export class RlcTableComponent implements OnInit {
     if (this.type == ElementEnum.Capacitor){
       this.cservice.deleteOne(element.id).subscribe(
         (response) => {},
-        err => this.handleError(null),
-        () => this.handleSucess('Successfully deleted.'));
+        err => this.handleError(null, err),
+        () => this.handleSuccess('Successfully deleted.'));
     } else if (this.type == ElementEnum.Resistor){
       this.rservice.deleteOne(element.id).subscribe(
         (response) => {},
-        err => this.handleError(null),
-        () => this.handleSucess('Successfully deleted.'));
+        err => this.handleError(null, err),
+        () => this.handleSuccess('Successfully deleted.'));
     }
 
   }
 
-  public handleSucess(msg: string){
+  public handleSuccess(msg: string){
     let message = 'Operation performed successfully.';
     if (msg != null){
       message = msg;
@@ -104,12 +105,17 @@ export class RlcTableComponent implements OnInit {
     this.getData();
   }
 
-  public handleError(msg: string){
-    let message = 'Error occured!';
-    if (msg != null){
-      message = msg;
+  public handleError(msg: string, error: any){
+    if (error.status == 401){
+      //this.authService.logout();
+    } else {
+      let message = 'Error occurred!';
+      if (msg != null){
+        message = msg;
+      }
+      this.snackBar.open(message, 'ERROR', { duration: 2000, verticalPosition: 'top'});
     }
-    this.snackBar.open(message, 'ERROR', { duration: 2000, verticalPosition: 'top'});
+
   }
 
 }
