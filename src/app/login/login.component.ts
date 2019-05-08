@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
             () => {
               this.router.navigate(['/combinator']);
               this.loginInProgress = false;
-            }
+            },
+            ()=>{ this.loginInProgress = false;}
           );
       }
     }
