@@ -26,6 +26,9 @@ export class CombinatorComponent implements OnInit {
   loading: boolean = false;
   selected: number = 0;
 
+  unit: string = "F";
+  ohm: boolean = false;
+
   constructor(private pusherService: PusherService, private combinatorService: CombinatorService) { }
 
   ngOnInit() {
@@ -63,6 +66,16 @@ export class CombinatorComponent implements OnInit {
     this.pusherService.channel.bind(environment.pusher.event, data => {;
       this.consoleLog = data + "<br/>" + this.consoleLog
     });
+  }
+
+  typeChanged(){
+    console.log(this.combModel.type);
+    if (this.combModel.type == 'Resistor' ){
+      this.ohm = true;
+    } else {
+      this.unit = 'F';
+      this.ohm = false;
+    }
   }
 
 

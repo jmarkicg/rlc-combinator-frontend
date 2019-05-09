@@ -9,6 +9,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 })
 export class TopnavComponent implements OnInit {
     public pushRightClass: string;
+    public username: string;
 
     constructor(public router: Router, private authService: AuthService) {
         this.router.events.subscribe(val => {
@@ -20,6 +21,7 @@ export class TopnavComponent implements OnInit {
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
+        this.username = this.authService.getUsername();
     }
 
     isToggled(): boolean {
@@ -34,6 +36,10 @@ export class TopnavComponent implements OnInit {
 
     onLoggedOut() {
       this.authService.logout();
+    }
+
+    openSettings(){
+      this.router.navigate(['/settings']);
     }
 
 }

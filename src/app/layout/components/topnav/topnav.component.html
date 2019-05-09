@@ -6,11 +6,12 @@
         RLC Combinator
     </div>
     <span class="nav-spacer"></span>
+  {{username}}
     <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="profile">
         <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #profile="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="openSettings()">
             <mat-icon>person</mat-icon>
             <span>Profile</span>
         </button>

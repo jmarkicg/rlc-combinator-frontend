@@ -5,14 +5,16 @@
   <form (ngSubmit)="onSubmit()" #elementForm="ngForm">
     <mat-form-field>
       <mat-label>Circuit type</mat-label>
-      <mat-select  matInput [(ngModel)]="combModel.type" name="type">
+      <mat-select  matInput [(ngModel)]="combModel.type" (ngModelChange)="typeChanged()" name="type">
                 <mat-option *ngFor="let elt of types" [value]="elt">
           {{elt}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="combModel.requestedValue" name="requestedValue" placeholder="Requested value" type="number" required>
+      <input matInput [(ngModel)]="combModel.requestedValue" name="requestedValue" placeholder="Requested value Ω" type="number" required>
+      <span matSuffix *ngIf="ohm"><img src="assets/images/ohm.png" style="width:15px;height:15px;"></span>
+      <span matSuffix *ngIf="!ohm">{{unit}}</span>
     </mat-form-field>
     <mat-form-field>
       <input matInput [(ngModel)]="combModel.allowedErrorPercentage" name="allowedErrorPercentage" placeholder="Allowed error percentage" type="number" required>

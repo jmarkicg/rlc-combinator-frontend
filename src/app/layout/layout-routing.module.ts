@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
 import {CombinatorComponent} from "./combinator/combinator.component";
+import {SettingsComponent} from "./components/settings/settings.component";
 
 const routes: Routes = [
     {
@@ -24,6 +25,10 @@ const routes: Routes = [
           {
               path: 'capacitors',
               loadChildren: './capacitors/capacitors.module#CapacitorsModule'
+          },
+          {
+            path: 'settings',
+            component: SettingsComponent
           }
         ]
     }

@@ -11,6 +11,8 @@
     <!--</div>-->
     <mat-form-field>
       <input matInput [(ngModel)]="element.value" name="value" placeholder="Value" type="number" required>
+      <span matSuffix *ngIf="ohm"><img src="assets/images/ohm.png" style="width:15px;height:15px;"></span>
+      <span matSuffix *ngIf="!ohm">{{unit}}</span>
     </mat-form-field>
     <mat-form-field>
       <input matInput [(ngModel)]="element.description" name="description" placeholder="Description" type="text">

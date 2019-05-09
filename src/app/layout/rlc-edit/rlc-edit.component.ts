@@ -7,6 +7,7 @@ import {Capacitor} from "../../shared/model/capacitor";
 import {CapacitorService} from "../../shared/services/capacitor.service";
 import {ResistorService} from "../../shared/services/resistor.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+declare function require(path: string);
 
 export interface DialogData {
   type: ElementEnum;
@@ -33,6 +34,9 @@ export class RlcEditComponent implements OnInit {
 
   cservice: CapacitorService;
   rservice: ResistorService;
+
+  unit: string;
+  ohm: boolean = false;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -63,11 +67,13 @@ export class RlcEditComponent implements OnInit {
       if (this.data.action == ActionsEnum.ADD){
         this.element = new Capacitor();
       }
+      this.unit = "F";
     } else {
       this.title += ' resistor';
       if (this.data.action == ActionsEnum.ADD){
         this.element = new Resistor();
       }
+      this.ohm = true;
     }
   }
 

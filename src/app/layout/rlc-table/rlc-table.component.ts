@@ -37,11 +37,15 @@ export class RlcTableComponent implements OnInit {
   displayedColumns: string[] = [ 'actions', 'type', 'value', 'description', 'numItems'];
   dataSource = null;
 
+  unit: string;
+
   ngOnInit() {
     if (this.type == ElementEnum.Capacitor) {
       this.displayedColumns = [ 'actions', 'type', 'value', 'description', 'numItems', 'capacitorType'];
+      this.unit = "F";
     } else{
       this.displayedColumns = [ 'actions', 'type', 'value', 'description', 'numItems', 'volume'];
+      this.unit = "Ω";
     }
     this.getData();
   }

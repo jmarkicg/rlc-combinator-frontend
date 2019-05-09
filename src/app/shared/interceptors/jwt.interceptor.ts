@@ -24,7 +24,6 @@ export class JwtInterceptor implements HttpInterceptor {
   ];
 
   constructor(
-   // private injector: Injector,
     private router: Router,
     private authService: AuthService
   ) {}
@@ -39,21 +38,24 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler) : Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any> | any> {
-
-    return next.handle(this.authRequest(request, this.authService.getAccessToken()))
-      .pipe(
-        catchError(err => {
-          if (err instanceof HttpErrorResponse) {
-            switch ((<HttpErrorResponse>err).status) {
-              case 401:
-                return this.handle401Error(request, next);
-              case 400:
-                return <any>this.authService.logout();
+    if (request.url.includes("auth/login") || request.url.includes("assets")){
+          return next.handle(request);
+    } else {
+      return next.handle(this.authRequest(request, this.authService.getAccessToken()))
+        .pipe(
+          catchError(err => {
+            if (err instanceof HttpErrorResponse) {
+              switch ((<HttpErrorResponse>err).status) {
+                case 401:
+                  return this.handle401Error(request, next);
+                case 400:
+                  return <any>this.authService.logout();
+              }
+            } else {
+              return throwError(err);
             }
-          } else {
-            return throwError(err);
-          }
-        }));
+          }));
+    }
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
