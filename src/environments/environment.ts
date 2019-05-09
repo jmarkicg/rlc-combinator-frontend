@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  restApiEndpoint: 'http://localhost:5000/api',
-  restAuthEndpoint: 'http://localhost:5000/auth',
+  // restApiEndpoint: 'http://localhost:5000/api',
+  // restAuthEndpoint: 'http://localhost:5000/auth',
   //restApiEndpoint: 'http://rlcbackend-env.dfkby3hm8v.eu-central-1.elasticbeanstalk.com/api',
-  //restApiEndpoint: 'https://api.rlc-combinator.com/api',
+  restApiEndpoint: 'https://api.rlc-combinator.com/api',
+  restAuthEndpoint: 'https://api.rlc-combinator.com/auth',
   pusher: {
     key: 'fc5ff8717b2e8cdd4283',
     cluster: 'eu',
