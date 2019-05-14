@@ -15,10 +15,10 @@ export class CombinatorService  {
     private httpClient: HttpClient){
   }
 
-  getCombinations(comb: CombinatorModel): Observable<CombinationModel[]> {
+  getCombinations(comb: CombinatorModel): Observable<number> {
     let url = endpoints().rlc.combinatorGenerate + '/' + comb.requestedValue
       + '/' + comb.minNumGeneratedItems + '/' + comb.maxNumGeneratedItems + '/' + comb.allowedErrorPercentage  + '/' + ElementEnum[comb.type];
-    return this.httpClient.get<CombinationModel[]>(url);
+    return this.httpClient.get<number>(url);
   }
 
 }

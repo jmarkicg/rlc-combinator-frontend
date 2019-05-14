@@ -10,7 +10,7 @@ export const environment = {
     key: 'fc5ff8717b2e8cdd4283',
     cluster: 'eu',
     channel: 'rlc-combinator',
-    event: 'rlc-comb-event'
+    event: 'rlc-comb-event-'
   }
 };
 

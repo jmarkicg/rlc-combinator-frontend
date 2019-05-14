@@ -5,6 +5,7 @@ import {PusherService} from "../../shared/services/pusher.service";
 import {environment} from "../../../environments/environment";
 import {CombinatorService} from "../../shared/services/combinator.service";
 import {CombinationModel} from "../../shared/model/combination-model";
+import {PusherModel} from "../../shared/model/pusher-model";
 
 @Component({
   selector: 'app-combinator',
@@ -38,7 +39,6 @@ export class CombinatorComponent implements OnInit {
     this.combModel.minNumGeneratedItems = 1;
     this.combModel.requestedValue = 50;
     this.getEnumKeys();
-    this.subScribeToLogs();
   }
 
   getEnumKeys(){
@@ -55,16 +55,23 @@ export class CombinatorComponent implements OnInit {
     this.loading = true;
     this.selected = 0;
     this.consoleLog ="";
-    this.combinatorService.getCombinations(this.combModel).subscribe((response: CombinationModel[]) => {
-      this.combinations = response;
-      this.selected = 1;
-      this.loading = false;
+    this.combinatorService.getCombinations(this.combModel).subscribe((response) => {
+      this.subScribeToLogs(response);
+
     });
   }
 
-  subScribeToLogs() {
-    this.pusherService.channel.bind(environment.pusher.event, data => {;
-      this.consoleLog = data + "<br/>" + this.consoleLog
+  subScribeToLogs(threadId: number) {
+    this.pusherService.channel.bind(environment.pusher.event + threadId, data => {
+      let pusherModel: PusherModel = JSON.parse(data);
+      if (pusherModel.logMessage){
+        this.consoleLog = pusherModel.logMessage + "<br/>" + this.consoleLog
+      } else {
+        this.combinations = pusherModel.combinations;
+        this.selected = 1;
+        this.loading = false;
+      }
+
     });
   }
 
