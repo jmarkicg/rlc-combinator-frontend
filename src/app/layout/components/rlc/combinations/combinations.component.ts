@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {CombinationModel} from "../../../shared/model/combination-model";
+import {CombinationModel} from "../../../../shared/model/combination-model";
 import {MatPaginator, MatTableDataSource, MatSnackBar, MatSort} from '@angular/material';
 
 @Component({

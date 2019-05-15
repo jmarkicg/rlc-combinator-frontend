@@ -1,12 +1,8 @@
-import { NgModule } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { AuthService } from "../shared/services/auth.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CapacitorService} from "../shared/services/capacitor.service";
-import {ResistorService} from "../shared/services/resistor.service";
+import {FormGroup} from "@angular/forms";
+
 
 @Component({
     selector: 'app-login',

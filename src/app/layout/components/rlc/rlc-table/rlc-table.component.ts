@@ -1,20 +1,22 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {CapacitorService} from "../../shared/services/capacitor.service";
-import {Capacitor} from "../../shared/model/capacitor";
-import {ElementEnum} from "../../shared/model/element-enum";
+import {CapacitorService} from "../../../../shared/services/capacitor.service";
+import {Capacitor} from "../../../../shared/model/capacitor";
+import {ElementEnum} from "../../../../shared/model/element-enum";
 import {RlcEditComponent} from "../rlc-edit/rlc-edit.component";
 import {MatDialog, MatTableDataSource, MatSnackBar, MatSort} from '@angular/material';
-import {ActionsEnum} from "../../shared/model/actions-enum";
-import {ResistorService} from "../../shared/services/resistor.service";
-import {Resistor} from "../../shared/model/resistor";
-import {BaseElement} from "../../shared/model/base-element";
-import {AuthService} from "../../shared/services/auth.service";
+import {ActionsEnum} from "../../../../shared/model/actions-enum";
+import {ResistorService} from "../../../../shared/services/resistor.service";
+import {Resistor} from "../../../../shared/model/resistor";
+import {BaseElement} from "../../../../shared/model/base-element";
+import {AuthService} from "../../../../shared/services/auth.service";
+import {InductorService} from "../../../../shared/services/inductor.service";
+import {Inductor} from "../../../../shared/model/inductor";
 
 @Component({
   selector: 'app-rlc-table',
   templateUrl: './rlc-table.component.html',
   styleUrls: ['./rlc-table.component.scss'],
-  providers: [CapacitorService, ResistorService, AuthService]
+  providers: [CapacitorService, ResistorService, AuthService, InductorService]
 })
 export class RlcTableComponent implements OnInit {
 
@@ -27,10 +29,13 @@ export class RlcTableComponent implements OnInit {
 
   cservice: CapacitorService;
   rservice: ResistorService;
+  iservice: InductorService;
   constructor(public capacitorService: CapacitorService, public resistorService: ResistorService,
-              public dialog: MatDialog, private snackBar: MatSnackBar, public authService: AuthService) {
+              public dialog: MatDialog, private snackBar: MatSnackBar, public authService: AuthService,
+              public inductorService: InductorService) {
     this.cservice = capacitorService;
     this.rservice = resistorService;
+    this.iservice = inductorService;
   }
 
   dataLoaded: boolean;
@@ -43,9 +48,12 @@ export class RlcTableComponent implements OnInit {
     if (this.type == ElementEnum.Capacitor) {
       this.displayedColumns = [ 'actions', 'type', 'value', 'description', 'numItems', 'capacitorType'];
       this.unit = "F";
-    } else{
+    } else if (this.type == ElementEnum.Resistor){
       this.displayedColumns = [ 'actions', 'type', 'value', 'description', 'numItems', 'volume'];
       this.unit = "Ω";
+    } else if (this.type == ElementEnum.Inductor){
+      this.displayedColumns = [ 'actions', 'type', 'value', 'description', 'numItems'];
+      this.unit = "H";
     }
     this.getData();
   }
@@ -58,6 +66,11 @@ export class RlcTableComponent implements OnInit {
     } else if (this.type == ElementEnum.Resistor){
       this.rservice.getResistors().subscribe(
         (response: Resistor[]) =>  this.handleElemRetrieval(response),
+        err => this.handleError('Error occurred while retrieving data.', err)
+      );
+    } else if (this.type == ElementEnum.Inductor){
+      this.iservice.getInductors().subscribe(
+        (response: Inductor[]) =>  this.handleElemRetrieval(response),
         err => this.handleError('Error occurred while retrieving data.', err)
       );
     }
@@ -96,6 +109,11 @@ export class RlcTableComponent implements OnInit {
         (response) => {},
         err => this.handleError(null, err),
         () => this.handleSuccess('Successfully deleted.'));
+    } else if (this.type == ElementEnum.Inductor){
+      this.iservice.deleteOne(element.id).subscribe(
+        (response) => {},
+        err => this.handleError(null, err),
+        () => this.handleSuccess('Successfully deleted.'));
     }
 
   }
@@ -111,7 +129,7 @@ export class RlcTableComponent implements OnInit {
 
   public handleError(msg: string, error: any){
     if (error.status == 401){
-      //this.authService.logout();
+      this.authService.logout();
     } else {
       let message = 'Error occurred!';
       if (msg != null){

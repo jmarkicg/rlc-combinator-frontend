@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
-import {CombinatorComponent} from "./combinator/combinator.component";
+import {CombinatorComponent} from "./components/rlc/combinator/combinator.component";
 import {SettingsComponent} from "./components/settings/settings.component";
+import {CapacitorsComponent} from "./components/rlc/capacitors/capacitors.component";
+import {InductorsComponent} from "./components/rlc/inductors/inductors.component";
+import {ResistorsComponent} from "./components/rlc/resistors/resistors.component";
 
 const routes: Routes = [
     {
@@ -16,19 +19,23 @@ const routes: Routes = [
           },
           {
               path: 'combinator',
-              loadChildren: './combinator/combinator.module#CombinatorModule'
+              component: CombinatorComponent
           },
           {
               path: 'resistors',
-              loadChildren: './resistors/resistors.module#ResistorsModule'
+              component: ResistorsComponent
+          },
+          {
+              path: 'inductors',
+              component: InductorsComponent
           },
           {
               path: 'capacitors',
-              loadChildren: './capacitors/capacitors.module#CapacitorsModule'
+              component: CapacitorsComponent
           },
           {
-            path: 'settings',
-            component: SettingsComponent
+              path: 'settings',
+              component: SettingsComponent
           }
         ]
     }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ElementEnum} from "../../shared/model/element-enum";
+import {ElementEnum} from "../../../../shared/model/element-enum";
 
 @Component({
   selector: 'app-capacitors',

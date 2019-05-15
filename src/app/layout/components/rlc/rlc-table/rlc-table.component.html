@@ -57,5 +57,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
+    <!-- Disclaimer column -->
+    <ng-container matColumnDef="disclaimer">
+      <td mat-footer-cell *matFooterCellDef colspan="2">
+        <span *ngIf="!dataSource.data.length"><i>No data</i></span>
+      </td>
+    </ng-container>
+
+    <tr mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row"></tr>
+
   </table>
 </div>

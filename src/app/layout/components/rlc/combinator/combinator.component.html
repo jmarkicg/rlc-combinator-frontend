@@ -3,7 +3,7 @@
     <mat-card-title>Combinator</mat-card-title>
   </mat-card-header>
   <form (ngSubmit)="onSubmit()" #elementForm="ngForm">
-    <mat-form-field>
+    <mat-form-field class="combinator-field">
       <mat-label>Circuit type</mat-label>
       <mat-select  matInput [(ngModel)]="combModel.type" (ngModelChange)="typeChanged()" name="type">
                 <mat-option *ngFor="let elt of types" [value]="elt">
@@ -11,18 +11,18 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="combinator-field">
       <input matInput [(ngModel)]="combModel.requestedValue" name="requestedValue" placeholder="Requested value Ω" type="number" required>
       <span matSuffix *ngIf="ohm"><img src="assets/images/ohm.png" style="width:15px;height:15px;"></span>
       <span matSuffix *ngIf="!ohm">{{unit}}</span>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="combinator-field">
       <input matInput [(ngModel)]="combModel.allowedErrorPercentage" name="allowedErrorPercentage" placeholder="Allowed error percentage" type="number" required>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="combinator-field">
       <input matInput [(ngModel)]="combModel.minNumGeneratedItems" name="minNumGeneratedItems" placeholder="Min. num of results" type="number" required>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="combinator-field">
       <input matInput [(ngModel)]="combModel.maxNumGeneratedItems" name="maxNumGeneratedItems" placeholder="Max. num of results" type="number" required>
     </mat-form-field>
 

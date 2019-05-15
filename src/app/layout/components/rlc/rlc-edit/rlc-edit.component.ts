@@ -1,12 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar, MatTableDataSource} from "@angular/material";
-import {ElementEnum} from "../../shared/model/element-enum";
-import {ActionsEnum} from "../../shared/model/actions-enum";
-import {Resistor} from "../../shared/model/resistor";
-import {Capacitor} from "../../shared/model/capacitor";
-import {CapacitorService} from "../../shared/services/capacitor.service";
-import {ResistorService} from "../../shared/services/resistor.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ElementEnum} from "../../../../shared/model/element-enum";
+import {ActionsEnum} from "../../../../shared/model/actions-enum";
+import {Resistor} from "../../../../shared/model/resistor";
+import {Capacitor} from "../../../../shared/model/capacitor";
+import {CapacitorService} from "../../../../shared/services/capacitor.service";
+import {ResistorService} from "../../../../shared/services/resistor.service";
+import {FormGroup} from "@angular/forms";
+import {InductorService} from "../../../../shared/services/inductor.service";
+import {Inductor} from "../../../../shared/model/inductor";
 declare function require(path: string);
 
 export interface DialogData {
@@ -19,7 +21,7 @@ export interface DialogData {
   selector: 'app-rlc-edit',
   templateUrl: './rlc-edit.component.html',
   styleUrls: ['./rlc-edit.component.scss'],
-  providers: [CapacitorService, ResistorService]
+  providers: [CapacitorService, ResistorService, InductorService]
 })
 export class RlcEditComponent implements OnInit {
 
@@ -30,10 +32,12 @@ export class RlcEditComponent implements OnInit {
   element: any;
 
   resistorType: ElementEnum = ElementEnum.Resistor;
+  //inductorType: ElementEnum = ElementEnum.Inductor;
   capacitorType: ElementEnum = ElementEnum.Capacitor;
 
   cservice: CapacitorService;
   rservice: ResistorService;
+  iservice: InductorService;
 
   unit: string;
   ohm: boolean = false;
@@ -42,10 +46,12 @@ export class RlcEditComponent implements OnInit {
     private snackBar: MatSnackBar,
     public capacitorService: CapacitorService,
     public resistorService: ResistorService,
+    public inductorService: InductorService,
     public dialogRef: MatDialogRef<RlcEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
       this.cservice = capacitorService;
       this.rservice = resistorService;
+      this.iservice = inductorService;
   }
 
   onNoClick(): void {
@@ -68,12 +74,18 @@ export class RlcEditComponent implements OnInit {
         this.element = new Capacitor();
       }
       this.unit = "F";
-    } else {
+    } else if(this.data.type == ElementEnum.Resistor){
       this.title += ' resistor';
       if (this.data.action == ActionsEnum.ADD){
         this.element = new Resistor();
       }
       this.ohm = true;
+    } else if(this.data.type == ElementEnum.Inductor){
+      this.title += ' inductor';
+      if (this.data.action == ActionsEnum.ADD){
+        this.element = new Inductor();
+      }
+      this.unit = "H";
     }
   }
 
@@ -87,9 +99,14 @@ export class RlcEditComponent implements OnInit {
         (response: Capacitor) => {},
        err => this.handleError(),
         () => this.handleSucess());
-    } else {
+    } else if (this.data.type == ElementEnum.Resistor){
       this.rservice.saveOne(this.element).subscribe(
         (response: Resistor) => {},
+        err => this.handleError(),
+        () => this.handleSucess());
+    } else if (this.data.type == ElementEnum.Inductor){
+      this.iservice.saveOne(this.element).subscribe(
+        (response: Inductor) => {},
         err => this.handleError(),
         () => this.handleSucess());
     }

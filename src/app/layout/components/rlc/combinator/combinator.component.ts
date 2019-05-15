@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ElementEnum} from "../../shared/model/element-enum";
-import {CombinatorModel} from "../../shared/model/combinator-model";
-import {PusherService} from "../../shared/services/pusher.service";
-import {environment} from "../../../environments/environment";
-import {CombinatorService} from "../../shared/services/combinator.service";
-import {CombinationModel} from "../../shared/model/combination-model";
-import {PusherModel} from "../../shared/model/pusher-model";
+import {ElementEnum} from "../../../../shared/model/element-enum";
+import {CombinatorModel} from "../../../../shared/model/combinator-model";
+import {PusherService} from "../../../../shared/services/pusher.service";
+import {environment} from "../../../../../environments/environment";
+import {CombinatorService} from "../../../../shared/services/combinator.service";
+import {CombinationModel} from "../../../../shared/model/combination-model";
+import {PusherModel} from "../../../../shared/model/pusher-model";
 
 @Component({
   selector: 'app-combinator',
@@ -27,8 +27,8 @@ export class CombinatorComponent implements OnInit {
   loading: boolean = false;
   selected: number = 0;
 
-  unit: string = "F";
-  ohm: boolean = false;
+  unit: string = "";
+  ohm: boolean = true;
 
   constructor(private pusherService: PusherService, private combinatorService: CombinatorService) { }
 
@@ -76,9 +76,11 @@ export class CombinatorComponent implements OnInit {
   }
 
   typeChanged(){
-    console.log(this.combModel.type);
     if (this.combModel.type == 'Resistor' ){
       this.ohm = true;
+    } else if (this.combModel.type == 'Inductor' ){
+      this.unit = 'H';
+      this.ohm = false;
     } else {
       this.unit = 'F';
       this.ohm = false;

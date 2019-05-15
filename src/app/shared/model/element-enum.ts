@@ -1,4 +1,6 @@
 export enum ElementEnum {
-  Capacitor="capacitor",
-  Resistor="resistor"
+  Resistor="resistor",
+  Inductor="inductor",
+  Capacitor="capacitor"
+
 }
