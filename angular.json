@@ -27,7 +27,8 @@
               "src/favicon.ico"
             ],
             "styles": [
-                "src/styles/styles.scss"
+                "src/styles/styles.scss",
+                "src/styles/theme.scss"
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.js"
@@ -89,7 +90,8 @@
               "node_modules/pusher-js/dist/web/pusher.js"
             ],
             "styles": [
-                "styles.scss"
+                "styles.scss",
+                 "theme.scss"
             ],
             "assets": [
               "src/assets",

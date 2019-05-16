@@ -58,9 +58,10 @@
     </mat-card-content>
 
     <mat-card-actions align="center">
-      <button  [disabled]="!elementForm.form.valid || loginInProgress" type="submit" mat-raised-button color="primary"
+      <button  [disabled]="!elementForm.form.valid || loginInProgress" type="submit" mat-raised-button color="accent"
                class="rlc-button-login"
-               >Login</button>
+               >
+        <mat-icon>vpn_key</mat-icon> Login</button>
     </mat-card-actions>
   </mat-card>
 
