@@ -32,6 +32,7 @@ import {CombinatorComponent} from "./components/rlc/combinator/combinator.compon
 import {RlcEditComponent} from "./components/rlc/rlc-edit/rlc-edit.component";
 import {CombinationsComponent} from "./components/rlc/combinations/combinations.component";
 import {RlcTableComponent} from "./components/rlc/rlc-table/rlc-table.component";
+import {DialogConfirmComponent} from "./components/common/dialog-confirm/dialog-confirm.component";
 
 @NgModule({
     imports: [
@@ -62,7 +63,7 @@ import {RlcTableComponent} from "./components/rlc/rlc-table/rlc-table.component"
         MatDialogModule,
         MatIconModule
     ],
-  exports: [RlcEditComponent],
+  exports: [RlcEditComponent, DialogConfirmComponent],
   declarations: [
       LayoutComponent,
       TopnavComponent,
@@ -74,8 +75,9 @@ import {RlcTableComponent} from "./components/rlc/rlc-table/rlc-table.component"
       CombinatorComponent,
       CombinationsComponent,
       RlcEditComponent,
-      RlcTableComponent],
-  entryComponents: [RlcEditComponent],
+      RlcTableComponent,
+      DialogConfirmComponent],
+  entryComponents: [RlcEditComponent, DialogConfirmComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class LayoutModule {}

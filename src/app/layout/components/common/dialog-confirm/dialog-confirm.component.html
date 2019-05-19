@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{title}}</mat-card-title>
+  </mat-card-header>
+  <form (ngSubmit)="onSubmit()" #elementForm="ngForm">
+    {{deleteMessage}}
+    <br>
+    <br>
+    <button mat-raised-button color="accent" type="submit" class="rlc-button-edit">
+      <mat-icon>check</mat-icon>
+      {{deleteButtonTitle}}
+    </button>
+    <button mat-raised-button type="reset" (click)="cancel()" class="rlc-button-edit">
+      <mat-icon>cancel</mat-icon>
+      {{cancelButtonTitle}}
+    </button>
+  </form>
+</mat-card>

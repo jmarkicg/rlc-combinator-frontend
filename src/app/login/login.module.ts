@@ -15,7 +15,7 @@ import {FormsModule} from "@angular/forms";
         MatButtonModule,
         FormsModule,
         MatCardModule,
-        MatIconModule
+        MatIconModule,
         FlexLayoutModule.withConfig({addFlexToParent: false})
     ],
     declarations: [LoginComponent]

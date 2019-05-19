@@ -32,7 +32,6 @@ export class RlcEditComponent implements OnInit {
   element: any;
 
   resistorType: ElementEnum = ElementEnum.Resistor;
-  //inductorType: ElementEnum = ElementEnum.Inductor;
   capacitorType: ElementEnum = ElementEnum.Capacitor;
 
   cservice: CapacitorService;
