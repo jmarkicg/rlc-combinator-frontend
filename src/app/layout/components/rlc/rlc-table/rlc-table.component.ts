@@ -11,6 +11,7 @@ import {BaseElement} from "../../../../shared/model/base-element";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {InductorService} from "../../../../shared/services/inductor.service";
 import {Inductor} from "../../../../shared/model/inductor";
+import {DialogConfirmComponent} from "../../common/dialog-confirm/dialog-confirm.component";
 
 @Component({
   selector: 'app-rlc-table',
@@ -86,15 +87,31 @@ export class RlcTableComponent implements OnInit {
     }
   }
 
-  openDialog(action: ActionsEnum, elem: any): void {
+  openEditSaveDialog(action: ActionsEnum, elem: any): void {
     let elem1 = Object.assign({}, elem);
     const dialogRef = this.dialog.open(RlcEditComponent, {
       width: '350px',
-      data: { type: this.type, element: elem1, action: action}
+      data: { type: this.type, element: elem1}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-     this.getData();
+      this.getData();
+    });
+  }
+
+  openDeleteDialog(elem: any): void {
+    let elem1 = Object.assign({}, elem);
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '350px',
+      data: { element: elem1, eventDelete: null}
+    });
+
+    dialogRef.componentInstance.onSubmitEvent.subscribe((element: BaseElement) => {
+      this.deleteElement(element);
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getData();
     });
   }
 
