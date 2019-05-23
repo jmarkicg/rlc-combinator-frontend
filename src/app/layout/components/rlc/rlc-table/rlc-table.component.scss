@@ -1,112 +1,128 @@
 //@import '../../../../node_modules/material-design-icons/iconfont/material-icons.css';
 
 table {
-//  width: 100%;
+  width: 100%;
 }
 
 .mat-table {
   font-family: Roboto,"Helvetica Neue",sans-serif;
 
 }
-.mat-header-cell{
-  padding-top: 5px;
-}
-.mat-cell{
-  font-size: 15px;
-}
-
-td.mat-cell{
-  padding-right: 15px;
-  padding-top: 5px;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-td,
-th {
-  width: 200px;
-}
-
-.rlcColumnClass{
-  width: 25px;
-}
-
-.example-button-row button,
-.example-button-row a {
-  margin-right: 8px;
-}
+//.mat-header-cell{
+//  padding-top: 5px;
+//}
+//.mat-cell{
+//  font-size: 15px;
+//}
+//
+//td.mat-cell{
+//  padding-right: 15px;
+//  padding-top: 5px;
+//}
+//
+//.mat-form-field {
+//  font-size: 14px;
+//  width: 100%;
+//}
+//
+//td,
+//th {
+//  width: 200px;
+//}
+//
+//.rlcColumnClass{
+//  width: 25px;
+//}
+//
+//.example-button-row button,
+//.example-button-row a {
+//  margin-right: 8px;
+//}
 
 
 
 /* -------------------------------------------------------Responsive -------------------------------------------------------*/
-//
-//
-//
-//body {
-//  font-family: 'Covered By Your Grace', cursive;
-//  line-height: 1.25;
-//
-//}
-//
-//
-//@media screen and (max-width: 960px) {
-//  .mat-table {
-//    border: 0;
-//    vertical-align: middle
-//  }
-//
-//  .mat-table caption {
-//    font-size: 1em;
-//  }
-//
-//    Enable this to hide header
-//  .mat-table .mat-header-cell {
-//
-//    border: 10px solid;
-//    clip: rect(0 0 0 0);
-//    height: 1px;
-//    margin: -1px;
-//    padding: 0;
-//    position: absolute;
-//    width: 1px;
-//  }
-//
-//  .mat-table .mat-row {
-//    border-bottom: 5px solid #ddd;
-//    display: block;
-//  }
-//  /*
-//  .mat-table .mat-row:nth-child(even) {background: #CCC}
-//  .mat-table .mat-row:nth-child(odd) {background: #FFF}
-//  */
-//  .mat-table .mat-cell {
-//    border-bottom: 1px solid #ddd;
-//    display: block;
-//    font-size: 1em;
-//    text-align: right;
-//    font-weight: bold;
-//    height:30px;
-//    margin-bottom: 4%;
-//  }
-//  .mat-table .mat-cell:before {
-//    /*
-//    * aria-label has no advantage, it won't be read inside a table
-//    content: attr(aria-label);
-//    */
-//    content: attr(data-label);
-//    float: left;
-//    text-transform: uppercase;
-//    font-weight: normal;
-//
-//    font-size: .85em;
-//  }
-//  .mat-table .mat-cell:last-child {
-//    border-bottom: 0;
-//  }
-//  .mat-table .mat-cell:first-child {
-//    margin-top: 4%;
-//  }
-//}
+
+body {
+  font-family: 'Covered By Your Grace', cursive;
+  line-height: 1;
+
+}
+
+
+@media screen and (max-width: 960px) {
+  .mat-table {
+    border: 0;
+    vertical-align: middle
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+/*
+  .mat-table .mat-header-cell {
+
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+*/
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+  /*
+  .mat-table .mat-row:nth-child(even) {background: #CCC}
+  .mat-table .mat-row:nth-child(odd) {background: #FFF}
+  */
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 1em;
+    text-align: right;
+    height:20px;
+    margin-bottom: 3%;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 20px
+  }
+  .mat-table .mat-cell:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: normal;
+
+    font-size: .85em;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+  .mat-table .mat-cell:first-child {
+   // margin-top: %;
+  }
+
+  mat-row {
+     min-height: 30px;
+  }
+  mat-footer-row{
+    min-height: 10px;
+  }
+
+  mat-footer-row::after, mat-header-row::after, mat-row::after {
+    display: none;
+    min-height: inherit;
+   // content: '';
+  }
+
+  .rlcButtons .mat-icon{
+    line-height: 0px;
+  }
+}

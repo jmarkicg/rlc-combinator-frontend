@@ -29,13 +29,24 @@
     </mat-form-field>
 
     <br>
-    <button mat-raised-button color="accent" type="submit" [disabled]="!elementForm.form.valid" class="rlc-button-edit">
-      <mat-icon>check</mat-icon>
-      Save
-    </button>
-    <button mat-raised-button type="reset" (click)="cancel()" class="rlc-button-edit">
-      <mat-icon>cancel</mat-icon>
-      Cancel
-    </button>
+    <div fxLayout="row wrap" fxLayoutGap="2px" fxLayoutAlign="flex-start" width="100%">
+      <button mat-raised-button color="accent" type="submit" [disabled]="!elementForm.form.valid">
+        <mat-icon>check</mat-icon>
+        Save
+      </button>
+      <button mat-raised-button type="reset" (click)="cancel()">
+        <mat-icon>cancel</mat-icon>
+        Cancel
+      </button>
+    </div>
+
+<!--    <button mat-raised-button color="accent" type="submit" [disabled]="!elementForm.form.valid" class="rlc-button-edit">-->
+<!--      <mat-icon>check</mat-icon>-->
+<!--      Save-->
+<!--    </button>-->
+<!--    <button mat-raised-button type="reset" (click)="cancel()" class="rlc-button-edit">-->
+<!--      <mat-icon>cancel</mat-icon>-->
+<!--      Cancel-->
+<!--    </button>-->
   </form>
 </mat-card>

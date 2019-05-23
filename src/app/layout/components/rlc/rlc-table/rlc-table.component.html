@@ -1,70 +1,111 @@
 <div *ngIf="dataLoaded">
 
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="type" matSortDirection="asc">
+  <mat-table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="type" matSortDirection="asc">
     <!-- Type Column -->
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef  [ngClass]="'rlcColumnClass'" mat-sort-header> Type</th>
-      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+      <mat-header-cell *matHeaderCellDef  [ngClass]="'rlcColumnClass'" mat-sort-header> Type</mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="type"> {{element.type}} </mat-cell>
     </ng-container>
 
     <!-- Value Column -->
     <ng-container matColumnDef="value">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Value ({{unit}}) </th>
-      <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Value ({{unit}}) </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="value"> {{element.value}} </mat-cell>
     </ng-container>
 
     <!-- Desc Column -->
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="description"> {{element.description}} </mat-cell>
     </ng-container>
 
     <!-- Num of items Column -->
     <ng-container matColumnDef="numItems">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of items </th>
-      <td mat-cell *matCellDef="let element"> {{element.numItems}} </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Number of items </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="numItems"> {{element.numItems}} </mat-cell>
     </ng-container>
 
     <!-- Capacitory type -->
     <ng-container matColumnDef="capacitorType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Capacitor type </th>
-      <td mat-cell *matCellDef="let element"> {{element.capacitorType}} </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Capacitor type </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="capacitorType"> {{element.capacitorType}} </mat-cell>
     </ng-container>
 
     <!-- Volume -->
     <ng-container matColumnDef="volume">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Volume </th>
-      <td mat-cell *matCellDef="let element"> {{element.volume}} </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Volume </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="volume"> {{element.volume}} </mat-cell>
     </ng-container>
 
     <!-- Edit Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>
+      <mat-header-cell *matHeaderCellDef>
         <button mat-icon-button (click)="openEditSaveDialog(addAction, null)" >
           <mat-icon aria-label="Add">add_circle</mat-icon>
         </button>
-      </th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button  (click)="openEditSaveDialog(editAction, element)" >
-          <mat-icon aria-label="Edit">edit</mat-icon>
-        </button>
-        <button mat-icon-button (click)="openDeleteDialog(element)">
-          <mat-icon aria-label="Delete">delete</mat-icon>
-        </button>
-      </td>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="actions">
+        <span class="rlcButtons">
+          <button mat-icon-button  (click)="openEditSaveDialog(editAction, element)" >
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openDeleteDialog(element)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </span>
+        </mat-cell>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
     <!-- Disclaimer column -->
     <ng-container matColumnDef="disclaimer">
-      <td mat-footer-cell *matFooterCellDef colspan="2">
+      <mat-footer-cell *matFooterCellDef colspan="2">
         <span *ngIf="!dataSource.data.length"><i>No data</i></span>
-      </td>
+      </mat-footer-cell>
     </ng-container>
 
-    <tr mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row"></tr>
+    <mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row"></mat-footer-row>
 
-  </table>
+  </mat-table>
 </div>
+
+
+
+
+<!--<div class="example-container mat-elevation-z8">-->
+
+<!--  <mat-table [dataSource]="dataSource2" matSort>-->
+
+<!--    &lt;!&ndash; ID Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="id">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let row" data-label="id"> {{row.cnt}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Progress Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="progress">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Progress </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let row" data-label="progress"> {{row.progress}}% </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="name">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let row" data-label="name"> {{row.name}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Color Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="color">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.color}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
+<!--    <mat-row *matRowDef="let row; columns: displayedColumns;">-->
+<!--    </mat-row>-->
+<!--  </mat-table>-->
+
+
+<!--</div>-->

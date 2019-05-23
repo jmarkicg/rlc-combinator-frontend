@@ -3,7 +3,7 @@ import {CapacitorService} from "../../../../shared/services/capacitor.service";
 import {Capacitor} from "../../../../shared/model/capacitor";
 import {ElementEnum} from "../../../../shared/model/element-enum";
 import {RlcEditComponent} from "../rlc-edit/rlc-edit.component";
-import {MatDialog, MatTableDataSource, MatSnackBar, MatSort} from '@angular/material';
+import {MatDialog, MatTableDataSource, MatSnackBar, MatSort, MatPaginator} from '@angular/material';
 import {ActionsEnum} from "../../../../shared/model/actions-enum";
 import {ResistorService} from "../../../../shared/services/resistor.service";
 import {Resistor} from "../../../../shared/model/resistor";
@@ -42,6 +42,8 @@ export class RlcTableComponent implements OnInit {
   dataLoaded: boolean;
   displayedColumns: string[] = [ 'actions', 'type', 'value', 'description', 'numItems'];
   dataSource = null;
+  dataSource2 = null;
+  displayedColumns2 = ['id', 'name', 'progress', 'color'];
 
   unit: string;
 
@@ -57,7 +59,20 @@ export class RlcTableComponent implements OnInit {
       this.unit = "H";
     }
     this.getData();
+
+    const users: UserData[] = [];
+    var users1=[];
+    for (let i = 1; i <= 100; i++) { /*users.push(createNewUser(i));*/
+
+      users1.push({"cnt" : i,"name":"batr"+i});
+
+    }
+
+    // Assign the data to the data source for the table to render
+    this.dataSource2 = new MatTableDataSource(users1);
   }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   private getData() {
     if (this.type == ElementEnum.Capacitor){
@@ -157,4 +172,33 @@ export class RlcTableComponent implements OnInit {
 
   }
 
+}
+
+
+/** Builds and returns a new User. */
+function createNewUser(id: number): UserData {
+  const name =
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+
+  return {
+    id: id.toString(),
+    name: name,
+    progress: Math.round(Math.random() * 100).toString(),
+    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
+  };
+}
+
+/** Constants used to fill up our data base. */
+const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
+  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
+const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
+  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
+  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
+
+export interface UserData {
+  id: string;
+  name: string;
+  progress: string;
+  color: string;
 }
