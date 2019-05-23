@@ -73,6 +73,7 @@ export class RlcEditComponent implements OnInit {
         this.element = new Capacitor();
       }
       this.unit = "F";
+      this.ohm = false;
     } else if(this.data.type == ElementEnum.Resistor){
       this.title += ' resistor';
       if (this.data.action == ActionsEnum.ADD){
@@ -85,6 +86,7 @@ export class RlcEditComponent implements OnInit {
         this.element = new Inductor();
       }
       this.unit = "H";
+      this.ohm = false;
     }
   }
 

@@ -33,6 +33,8 @@ import {RlcEditComponent} from "./components/rlc/rlc-edit/rlc-edit.component";
 import {CombinationsComponent} from "./components/rlc/combinations/combinations.component";
 import {RlcTableComponent} from "./components/rlc/rlc-table/rlc-table.component";
 import {DialogConfirmComponent} from "./components/common/dialog-confirm/dialog-confirm.component";
+import {FooterComponent} from "./components/footer/footer.component";
+import {TermsComponent} from "./components/terms/terms.component";
 
 @NgModule({
     imports: [
@@ -76,7 +78,9 @@ import {DialogConfirmComponent} from "./components/common/dialog-confirm/dialog-
       CombinationsComponent,
       RlcEditComponent,
       RlcTableComponent,
-      DialogConfirmComponent],
+      DialogConfirmComponent,
+      FooterComponent,
+      TermsComponent],
   entryComponents: [RlcEditComponent, DialogConfirmComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

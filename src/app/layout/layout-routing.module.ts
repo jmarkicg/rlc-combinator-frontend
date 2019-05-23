@@ -7,6 +7,7 @@ import {SettingsComponent} from "./components/settings/settings.component";
 import {CapacitorsComponent} from "./components/rlc/capacitors/capacitors.component";
 import {InductorsComponent} from "./components/rlc/inductors/inductors.component";
 import {ResistorsComponent} from "./components/rlc/resistors/resistors.component";
+import {TermsComponent} from "./components/terms/terms.component";
 
 const routes: Routes = [
     {
@@ -36,6 +37,10 @@ const routes: Routes = [
           {
               path: 'settings',
               component: SettingsComponent
+          },
+          {
+            path: 'terms',
+            component: TermsComponent
           }
         ]
     }

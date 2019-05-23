@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatSnackBar} from "@angular/material";
 import {ElementEnum} from "../../../../shared/model/element-enum";
 import {CombinatorModel} from "../../../../shared/model/combinator-model";
 import {PusherService} from "../../../../shared/services/pusher.service";
@@ -30,7 +31,7 @@ export class CombinatorComponent implements OnInit {
   unit: string = "";
   ohm: boolean = true;
 
-  constructor(private pusherService: PusherService, private combinatorService: CombinatorService) { }
+  constructor(private pusherService: PusherService, private combinatorService: CombinatorService,  private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.combModel = new CombinatorModel();
@@ -55,10 +56,15 @@ export class CombinatorComponent implements OnInit {
     this.loading = true;
     this.selected = 0;
     this.consoleLog ="";
+    console.log('test');
     this.combinatorService.getCombinations(this.combModel).subscribe((response) => {
       this.subScribeToLogs(response);
-
-    });
+        console.log(response);
+    },
+      err => {
+      console.log(err);
+        this.snackBar.open('Error occured.', 'ERROR', { duration: 2000, verticalPosition: 'top' });
+      } );
   }
 
   subScribeToLogs(threadId: number) {

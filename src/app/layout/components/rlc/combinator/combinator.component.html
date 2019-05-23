@@ -12,7 +12,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="combinator-field">
-      <input matInput [(ngModel)]="combModel.requestedValue" name="requestedValue" placeholder="Requested value Ω" type="number" required>
+      <input matInput [(ngModel)]="combModel.requestedValue" name="requestedValue" placeholder="Requested value" type="number" required>
       <span matSuffix *ngIf="ohm"><img src="assets/images/ohm.png" style="width:15px;height:15px;"></span>
       <span matSuffix *ngIf="!ohm">{{unit}}</span>
     </mat-form-field>
