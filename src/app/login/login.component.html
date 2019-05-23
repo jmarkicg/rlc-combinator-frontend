@@ -10,7 +10,7 @@
       <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
 
         <mat-card-title><h2>RLC Combinator</h2></mat-card-title>
-        <img src="assets/images/logo2.png" style="width:117px;height:78px;">
+        <img src="assets/images/logo2.png" class="appLogo">
       </div>
 
     </mat-card-header>
@@ -27,8 +27,7 @@
 
     <mat-card-actions align="center">
       <button  [disabled]="!elementForm.form.valid || loginInProgress" type="submit" mat-raised-button color="accent"
-               class="rlc-button-login"
-               >
+               class="rlc-button-login">
         <mat-icon>vpn_key</mat-icon> Login</button>
     </mat-card-actions>
   </mat-card>

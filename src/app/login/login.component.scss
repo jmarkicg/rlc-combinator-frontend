@@ -36,3 +36,14 @@ mat-card-header{
   height: 100%;
 }
 
+.appLogo{
+  width: 117px;
+  height:78px;
+}
+
+@media screen and (max-width: 960px) {
+  .appLogo{
+    padding-left: 45px;
+  }
+}
+
