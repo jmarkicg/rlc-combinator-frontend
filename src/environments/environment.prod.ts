@@ -4,8 +4,8 @@
 
 export const environment = {
   production: true,
-  restApiEndpoint: 'https://api.rlc-combinator.com/api',
-  restAuthEndpoint: 'https://api.rlc-combinator.com/auth',
+  restApiEndpoint: 'https://rlc-combinator-backend.herokuapp.com/api',
+  restAuthEndpoint: 'https://rlc-combinator-backend.herokuapp.com/auth',
   pusher: {
     key: 'fc5ff8717b2e8cdd4283',
     cluster: 'eu',
